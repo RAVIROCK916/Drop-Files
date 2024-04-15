@@ -3,16 +3,32 @@ import { getFiles, getFile, uploadFile } from "./controllers/files.js";
 import connectDB from "./store/connection.js";
 import dotenv from "dotenv";
 import expressWinston from "express-winston";
-import { transports, format } from "winston";
+import winston, { transports, format } from "winston";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
-import fs from "fs";
 import path, { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const app = express();
 const PORT = 3000;
+let logLevel;
+
+if (process.env.NODE_ENV === "production") {
+	logLevel = "warn";
+} else {
+	logLevel = "info";
+}
+
+// create logger
+export const logger = winston.createLogger({
+	level: logLevel,
+	format: winston.format.json(),
+	transports: [
+		new winston.transports.File({ filename: "error.log", level: "error" }),
+		new winston.transports.Console(),
+	],
+});
 
 const upload = multer({ dest: "uploads/" });
 
@@ -30,7 +46,6 @@ app.use(
 		meta: false,
 	})
 );
-
 app.use(
 	cors({
 		origin: "*",
@@ -40,7 +55,6 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(
 	"/uploads",
 	express.static(join(dirname(fileURLToPath(import.meta.url)), "uploads"))
@@ -58,5 +72,5 @@ app.get("/files/:id", getFile);
 app.post("/file/upload", upload.single("file"), uploadFile);
 
 app.listen(PORT, () => {
-	console.log("Listening to port", PORT);
+    logger.info("Server started on port " + PORT);
 });
