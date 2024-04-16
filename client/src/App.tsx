@@ -10,6 +10,13 @@ function App() {
 		{ id: string; name: string; mimetype: string }[]
 	>([]);
 
+	const allowedTypes = [
+		"image/jpeg",
+		"image/png",
+		"application/json",
+		"application/pdf",
+	];
+
 	useEffect(() => {
 		fetchFiles();
 	}, []);
@@ -23,8 +30,6 @@ function App() {
 
 		return data;
 	};
-
-	console.log(files);
 
 	return (
 		<div className="w-screen h-screen flex justify-center items-center bg-main-background opacity-80 transition-all">
@@ -53,7 +58,16 @@ function App() {
 					</div>
 				</div>
 				<form className="border-l border-l-slate-100 p-4 flex flex-col flex-1 justify-center items-center gap-3">
-					<UploadButton setFiles={setFiles} />
+					<UploadButton
+						setFiles={setFiles}
+						allowedTypes={allowedTypes}
+					/>
+					<p className="text-sm">
+						Allowed files are{" "}
+						{allowedTypes
+							.map((type) => "*." + type.split("/")[1])
+							.join(", ")}{" "}
+					</p>
 				</form>
 			</main>
 		</div>

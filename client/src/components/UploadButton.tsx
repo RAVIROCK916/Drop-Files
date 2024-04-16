@@ -4,7 +4,7 @@ import { Button, message, Upload } from "antd";
 import type { UploadProps } from "antd";
 import axios from "axios";
 
-const UploadButton = ({ setFiles }: { setFiles: any }) => {
+const UploadButton = ({ setFiles, allowedTypes }: { setFiles: any, allowedTypes: string[] }) => {
 	const [fileList, setFileList] = useState<any[]>([]);
 	const [uploading, setUploading] = useState(false);
 
@@ -62,13 +62,7 @@ const UploadButton = ({ setFiles }: { setFiles: any }) => {
 			setFileList(newFileList);
 		},
 		beforeUpload: (file) => {
-			const allowedTypes = [
-				"image/jpeg",
-				"image/png",
-				"application/json",
-				"application/pdf",
-			];
-			console.log("type", file.type);
+			
 			if (!allowedTypes.includes(file.type)) {
 				message.error(`${file.name} is not a supported`);
 			} else {
