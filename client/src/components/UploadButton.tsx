@@ -8,35 +8,50 @@ const UploadButton = ({ setFiles }: { setFiles: any }) => {
 	const [fileList, setFileList] = useState<any[]>([]);
 	const [uploading, setUploading] = useState(false);
 
-	const handleUpload = () => {
+	const uploadFile = (file: any) => {
 		const formData = new FormData();
-		setUploading(true);
-
 		const url = "http://localhost:3000/file/upload";
-
 		const config = {
 			headers: {
 				"content-type": "multipart/form-data",
 			},
 		};
-		const file = fileList[0];
+
 		formData.append("file", file);
 		formData.append("fileName", file.name);
 		axios
 			.post(url, formData, config)
 			.then((res) => {
-                setFiles((prev: any) => [...prev, {id: res.data.id, name:res.data.name, mimetype: fileList[0].type}])
-                console.log(fileList);
-                
-                setFileList([]);
+				setFiles((prev: any) => [
+					...prev,
+					{
+						id: res.data.id,
+						name: res.data.name,
+						mimetype: fileList[0].type,
+					},
+				]);
+				console.log(fileList);
+
+				setFileList([]);
 				message.success("upload successfully.");
 			})
 			.catch(() => {
 				message.error("upload failed.");
 			})
-			.finally(() => {
-				setUploading(false);
+			.finally(() => {});
+	};
+
+	const handleUpload = () => {
+		try {
+			setUploading(true);
+			fileList.map((file) => {
+				uploadFile(file);
 			});
+		} catch (error) {
+			message.error("Failed to upload file");
+		} finally {
+			setUploading(false);
+		}
 	};
 
 	const props: UploadProps = {
@@ -47,8 +62,18 @@ const UploadButton = ({ setFiles }: { setFiles: any }) => {
 			setFileList(newFileList);
 		},
 		beforeUpload: (file) => {
-			setFileList([...fileList, file]);
-
+			const allowedTypes = [
+				"image/jpeg",
+				"image/png",
+				"application/json",
+				"application/pdf",
+			];
+			console.log("type", file.type);
+			if (!allowedTypes.includes(file.type)) {
+				message.error(`${file.name} is not a supported`);
+			} else {
+				setFileList([...fileList, file]);
+			}
 			return false;
 		},
 		fileList,
