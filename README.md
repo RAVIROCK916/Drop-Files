@@ -46,6 +46,7 @@ npm install
 Run these commands for client side
 ```bash
 cd client
+npm i
 npm run dev
 ```
 The client will be running on `localhost:5173`
@@ -53,7 +54,18 @@ The client will be running on `localhost:5173`
 Run these commands for client side
 ```bash
 cd server
+npm i
 npm run dev
 ```
 
 The server will be running on `localhost:3000`
+
+## Running using docker
+
+- Install docker and docker compose
+
+
+Now run this command in terminal
+```bash
+docker compose up
+```

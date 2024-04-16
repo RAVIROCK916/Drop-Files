@@ -1,0 +1,23 @@
+FROM node:21 AS builder
+
+WORKDIR /usr/src/app/client
+
+COPY client/package*.json ./
+
+RUN npm install
+
+COPY client .
+
+RUN npm run build
+
+FROM node:21-alpine
+
+RUN npm install -g serve
+
+WORKDIR /usr/src/app/client
+
+COPY --from=builder /usr/src/app/client/dist ./build
+
+EXPOSE 4000
+
+CMD ["serve", "-l", "4000", "build/"]
