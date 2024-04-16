@@ -5,7 +5,14 @@ import fs from "fs";
 import { logger } from "../index.js";
 
 export async function getFiles(req, res) {
-	const files = await File.find({});
+    let files = await File.find({}).select(["id", "name", "mimetype"]);
+    files = files.map(file => {
+        return {
+            id: file._id,
+            name: file.name,
+            mimetype: file.mimetype
+        }
+    })
 	res.json(files);
 }
 
