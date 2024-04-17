@@ -69,3 +69,6 @@ Now run this command in terminal
 ```bash
 docker compose up
 ```
+
+## Author
+[Ravi Teja Pedapudi](https://github.com/RaviRock916)

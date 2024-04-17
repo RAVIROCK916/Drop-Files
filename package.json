@@ -1,0 +1,13 @@
+{
+	"name": "Drop Files",
+	"version": "1.0.0",
+	"description": "This is a file sharing app that allows users to upload and download files. It consists of a React frontend and Node/Express backend.",
+	"scripts": {
+		"build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
+		"start": "node server/dist/server.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Ravi Teja Pedapudi",
+	"license": "ISC"
+}
