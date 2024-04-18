@@ -70,5 +70,8 @@ Now run this command in terminal
 docker compose up
 ```
 
+## Hosted Site
+https://drop-files.vercel.app/
+
 ## Author
 [Ravi Teja Pedapudi](https://github.com/RaviRock916)

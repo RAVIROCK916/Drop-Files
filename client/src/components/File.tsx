@@ -98,7 +98,7 @@ const File = ({
 		>
 			<div className="flex gap-3 items-center">
 				{renderIcon()}
-				<p>{name}</p>
+				<p className="min-w-10 max-w-40 truncate" title={name}>{name}</p>
 				<Button
 					type="primary"
 					onClick={downloadFile}

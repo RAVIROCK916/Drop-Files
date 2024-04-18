@@ -2,12 +2,28 @@
 	"name": "Drop Files",
 	"version": "1.0.0",
 	"description": "This is a file sharing app that allows users to upload and download files. It consists of a React frontend and Node/Express backend.",
+	"main": "index.js",
+	"type": "module",
 	"scripts": {
-		"build": "cd client && npm install && npm run build && cd ../server && npm install",
-		"start": "node server/dist/server.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd client && npm start",
+    "server": "cd server && npm run dev",
+		"build": "cd client && npm install && npm run build",
+		"start": "node server/dist/server.js"
 	},
-	"keywords": [],
+  "dependencies": {
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"express-winston": "^4.2.0",
+		"mongoose": "^8.3.1",
+		"multer": "^1.4.5-lts.1",
+		"winston": "^3.13.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.0"
+	},
+	"keywords": ["files", "drop box"],
 	"author": "Ravi Teja Pedapudi",
 	"license": "ISC"
 }

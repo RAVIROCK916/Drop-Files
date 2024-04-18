@@ -10,8 +10,13 @@ import multer from "multer";
 import path, { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
+// dotenv configuration
+dotenv.config({ path: '../.env' });
+console.log(process.env.PORT);
+console.log('.env');
+
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 let logLevel;
 
 if (process.env.NODE_ENV === "production") {
@@ -32,8 +37,6 @@ export const logger = winston.createLogger({
 
 const upload = multer({ dest: "uploads/" });
 
-// dotenv configuration
-dotenv.config();
 
 // mongodb connection
 connectDB();

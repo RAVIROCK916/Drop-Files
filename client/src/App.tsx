@@ -42,11 +42,11 @@ function App() {
 						stroke="black"
 					/>
 				</div>
-				<div className="flex flex-col gap-4 h-max p-8">
+				<div className="flex flex-col gap-6 h-max p-8">
 					<h1 className="text-3xl font-semibold text-zinc-900">
 						Files
 					</h1>
-					<div className="flex flex-wrap gap-4 h-max">
+					<div className="flex flex-wrap gap-x-6 gap-y-4 h-max">
 						{files.map((file) => (
 							<File
 								key={file.id}
