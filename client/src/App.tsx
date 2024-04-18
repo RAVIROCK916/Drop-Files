@@ -11,10 +11,11 @@ function App() {
 	>([]);
 
 	const allowedTypes = [
+    "text/plain",
 		"image/jpeg",
 		"image/png",
 		"application/json",
-		"application/pdf",
+    "application/pdf",
 	];
 
 	useEffect(() => {
@@ -62,10 +63,10 @@ function App() {
 						setFiles={setFiles}
 						allowedTypes={allowedTypes}
 					/>
-					<p className="text-sm">
+					<p className="text-sm min-w-60">
 						Allowed files are{" "}
 						{allowedTypes
-							.map((type) => "*." + type.split("/")[1])
+							.map((type) => "." + type.split("/")[1])
 							.join(", ")}{" "}
 					</p>
 				</form>
