@@ -22,11 +22,24 @@ The backend is a Node/Express app that handles:
 
 It uses MongoDB and Mongoose for data storage.
 
+So ensure that MongoDB is installed and running on your local machine or provide a MongoDB URI in the `.env` file in the server folder.
+
+To run MongoDB, check that the MongoDB service is running. If not, start it with the following command:
+```bash
+sudo service mongod start
+```
+
+Coming to the server,
+
 The main endpoints are:
 
 - `GET /files` - Get list of files
 - `GET /files/:id` - Get info about a file 
 - `POST /file/upload` - Upload a new file
+
+Now you can either run locally on your machine or if you have Docker installed, you can run the entire application using Docker Compose. 
+
+Let us go through them step by step:
 
 ## Running Locally
 
